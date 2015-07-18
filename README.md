@@ -21,9 +21,10 @@ Usage
 ```
 for i := 0; i < 100; i++ {
     go func() {
-        _ = r.Get()
-        time.Sleep(time.Millisecond * 100)
-        r.Put()
+        if advance {
+            time.Sleep(time.Millisecond * 100)
+            go r.Put()
+        }
     }()
 }
 ```
